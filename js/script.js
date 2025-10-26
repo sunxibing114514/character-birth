@@ -1,24 +1,39 @@
-// Load characters from JSON file
-fetch('data/characters.json')
+let characters = [];
+let games = [];
+
+// Load games from game.json
+fetch('data/game.json')
     .then(response => response.json())
     .then(data => {
-        window.characters = data;
-        displayCharacters();
+        games = data;
+        loadCharacters();
     })
-    .catch(error => console.error('Error loading characters:', error));
+    .catch(error => console.error('Error loading games:', error));
 
-// Function to display characters
+// Load characters from characters.json
+function loadCharacters() {
+    fetch('data/characters.json')
+        .then(response => response.json())
+        .then(data => {
+            characters = data;
+            displayCharacters();
+        })
+        .catch(error => console.error('Error loading characters:', error));
+}
+
+// Function to display characters with game name
 function displayCharacters() {
     const list = document.getElementById('charactersList');
     list.innerHTML = ''; // Clear the list
     characters.forEach(character => {
+        const game = games.find(g => g.game.id === character.form); // Get game by ID
         const card = document.createElement('div');
         card.classList.add('character-card');
         card.innerHTML = `
             <img src="${character.image}" alt="${character.character}" />
             <h3>${character.character}</h3>
             <p>Birth: ${character.birth}</p>
-            <p>From: ${character.form}</p>
+            <p>From: ${game ? game.game.name : 'Unknown'}</p>
         `;
         list.appendChild(card);
     });
