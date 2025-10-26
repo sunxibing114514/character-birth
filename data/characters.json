@@ -4,14 +4,13 @@
         "id": "1",
         "birth": "2015-01-01",
         "image": "images/1/image1.jpg",
-        "form": "Game 1"
+        "form": "1"  // Referencing the game ID from game.json
     },
     {
         "character": "Character 2",
         "id": "2",
         "birth": "2016-05-15",
         "image": "images/2/image2.jpg",
-        "form": "Game 2"
+        "form": "2"  // Referencing the game ID from game.json
     }
-    // 更多角色
 ]
