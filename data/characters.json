@@ -1,0 +1,17 @@
+[
+    {
+        "character": "Character 1",
+        "id": "1",
+        "birth": "2015-01-01",
+        "image": "images/1/image1.jpg",
+        "form": "Game 1"
+    },
+    {
+        "character": "Character 2",
+        "id": "2",
+        "birth": "2016-05-15",
+        "image": "images/2/image2.jpg",
+        "form": "Game 2"
+    }
+    // 更多角色
+]
