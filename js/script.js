@@ -16,16 +16,20 @@ function loadCharacters() {
         .then(response => response.json())
         .then(data => {
             characters = data;
-            displayCharacters();
+            displayRandomCharacters();
         })
         .catch(error => console.error('Error loading characters:', error));
 }
 
-// Function to display characters with game name
-function displayCharacters() {
+// Function to display random characters
+function displayRandomCharacters() {
     const list = document.getElementById('charactersList');
     list.innerHTML = ''; // Clear the list
-    characters.forEach(character => {
+
+    // Get a random subset of characters (e.g., 5 characters)
+    const randomCharacters = getRandomCharacters(5);
+
+    randomCharacters.forEach(character => {
         const game = games.find(g => g.game.id === character.form); // Get game by ID
         const card = document.createElement('div');
         card.classList.add('character-card');
@@ -39,6 +43,12 @@ function displayCharacters() {
     });
 }
 
+// Function to get a random subset of characters
+function getRandomCharacters(count) {
+    const shuffled = [...characters].sort(() => 0.5 - Math.random());  // Shuffle the array
+    return shuffled.slice(0, count);  // Return the first 'count' characters
+}
+
 // Search Functionality
 function searchCharacters() {
     const query = document.getElementById('searchInput').value.toLowerCase();
@@ -47,5 +57,5 @@ function searchCharacters() {
     );
     characters.length = 0;  // Clear the characters array and push filtered results
     characters.push(...filteredCharacters);
-    displayCharacters();
+    displayRandomCharacters();
 }
